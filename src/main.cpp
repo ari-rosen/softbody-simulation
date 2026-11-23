@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
 int main() {
-    Application app("Softbody Physics Simulation", 800, 450);
+    Application app("Softbody Physics Simulation", 1600, 900);
     app.run();
 }

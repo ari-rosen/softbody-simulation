@@ -21,6 +21,9 @@ FetchContent_MakeAvailable(raylib)
 add_executable(soft_body_sim 
     src/main.cpp
     src/Application.cpp
+    src/SoftBody.cpp
+    src/Particle.cpp
+    src/Simulation.cpp
 )
 
 # 3. Link raylib and the raylib-cpp interface target

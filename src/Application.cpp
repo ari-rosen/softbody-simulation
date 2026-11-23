@@ -2,29 +2,44 @@
 #include "raylib.h"
 
 Application::Application(std::string_view title, int32_t width, int32_t height)
-    : title(title), width(width), height(height), running(true)
+    : _title(title), _width(width), _height(height), _running(true)
 {}
 
 void Application::run() {
     start();
-    while (running) {
+    while (_running) {
         update();
+        render();
     }
 }
 
 void Application::start() {
-    InitWindow(width, height, title.c_str());
+    InitWindow(_width, _height, _title.c_str());
     SetTargetFPS(60);
+    
+    _simulation.addSoftBody({{800, 200}, 100, 32, BLUE});
+    _simulation.addSoftBody({{825, 600}, 150, 32, RED});
+    _simulation.addSoftBody({{300, 100}, 250, 32, PURPLE});
+    _simulation.addSoftBody({{1200, 200}, 200, 32, GREEN});
+    _simulation.addSoftBody({{700, 400}, 50, 32, ORANGE});
+    _simulation.addSoftBody({{1300, 600}, 75, 32, BLACK});
 }
 
 void Application::update() {
-    running = !WindowShouldClose();
+    _running = !WindowShouldClose();
 
+    float dt = GetFrameTime();
+
+    _simulation.handleMouseInput(GetMousePosition(), IsMouseButtonDown(MOUSE_BUTTON_LEFT), 20.0f);
+    _simulation.update(dt, {0, 1500});
+}
+
+void Application::render() {
     BeginDrawing();
 
     ClearBackground(RAYWHITE);
 
-    DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+    _simulation.draw();
 
     EndDrawing();
 }

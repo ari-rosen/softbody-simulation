@@ -1,5 +1,9 @@
+#pragma once
+
 #include <string_view>
 #include <string>
+
+#include "Simulation.hpp"
 
 class Application {
 public:
@@ -8,14 +12,15 @@ public:
     void run();
 
 private:
-    
     void start();
     void update();
-
+    void render();
 private:
-    std::string title;
-    int32_t width, height;
+    Simulation _simulation;
 
-    bool running;
+    std::string _title;
+    int32_t _width, _height;
+
+    bool _running;
 
 };
