@@ -1,8 +1,12 @@
 #include "Application.hpp"
 #include "raylib.h"
 
+
+#include "raygui.h"
+
+
 Application::Application(std::string_view title, int32_t width, int32_t height)
-    : _title(title), _width(width), _height(height), _running(true)
+    : _title(title), _width(width), _height(height), _running(true), _uiPanel(_simulation)
 {}
 
 void Application::run() {
@@ -14,7 +18,10 @@ void Application::run() {
 }
 
 void Application::start() {
+
     InitWindow(_width, _height, _title.c_str());
+
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 12);
     SetTargetFPS(60);
     
     _simulation.addSoftBody({{800, 200}, 100, 32, BLUE});
@@ -31,7 +38,7 @@ void Application::update() {
     float dt = GetFrameTime();
 
     _simulation.handleMouseInput(GetMousePosition(), IsMouseButtonDown(MOUSE_BUTTON_LEFT), 20.0f);
-    _simulation.update(dt, {0, 1500});
+    _simulation.update(dt);
 }
 
 void Application::render() {
@@ -40,6 +47,7 @@ void Application::render() {
     ClearBackground(RAYWHITE);
 
     _simulation.draw();
+    _uiPanel.render();
 
     EndDrawing();
 }

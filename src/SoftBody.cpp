@@ -147,14 +147,34 @@ Rectangle SoftBody::getBoundingBox() const {
     return {minX, minY, maxX - minX, maxY - minY};
 }
 
-void SoftBody::draw() const {
-    std::vector<Vector2> outerPoints;
-    outerPoints.push_back(_particles[_resolution - 1].position);
-    for (int i = 0; i < _resolution; ++i) {
-        outerPoints.push_back(_particles[i].position);
-    }
-    outerPoints.push_back(_particles[0].position);
-    outerPoints.push_back(_particles[1].position);
 
-    DrawSplineCatmullRom(outerPoints.data(), outerPoints.size(), 10.0f, _color);
+void SoftBody::draw(bool renderFan, bool renderPoints) const {
+    if (renderFan) {
+        if (_particles.size() < 3) return;
+
+        Vector2 center = calculateCenterOfMass();
+        
+        // Render slice triangles with swapped p2/p1 order to fix screen-space winding/visibility
+        for (int i = 0; i < _resolution; ++i) {
+            Vector2 p1 = _particles[i].position;
+            Vector2 p2 = _particles[(i + 1) % _resolution].position;
+            DrawTriangle(center, p2, p1, _color);
+        }
+    } else {
+        // Render as Catmull-Rom Spline
+        std::vector<Vector2> outerPoints;
+        outerPoints.push_back(_particles[_resolution - 1].position);
+        for (int i = 0; i < _resolution; ++i) {
+            outerPoints.push_back(_particles[i].position);
+        }
+        outerPoints.push_back(_particles[0].position);
+        outerPoints.push_back(_particles[1].position);
+
+        DrawSplineCatmullRom(outerPoints.data(), outerPoints.size(), 10.0f, _color);
+    }
+    if (renderPoints) {
+        for (const auto& p : _particles) {
+            DrawCircleV(p.position, 3.0f, BLACK);
+        }
+    }
 }

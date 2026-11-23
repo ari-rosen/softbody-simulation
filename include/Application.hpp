@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Simulation.hpp"
+#include "UIPanel.hpp"
 
 class Application {
 public:
@@ -17,6 +18,7 @@ private:
     void render();
 private:
     Simulation _simulation;
+    UIPanel _uiPanel;
 
     std::string _title;
     int32_t _width, _height;

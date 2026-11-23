@@ -46,7 +46,11 @@ void Simulation::addSoftBody(const SoftBody& body) {
     _softBodies.push_back(body);
 }
 
-void Simulation::update(float dt, Vector2 gravity) {
+void Simulation::clearSoftBodies() {
+    _softBodies.clear();
+}
+
+void Simulation::update(float dt) {
     if (dt <= 0.0f) return;
 
     const float subDt = dt / substeps;
@@ -350,6 +354,6 @@ void Simulation::applyParticleCorrection(Particle& pa, Particle& b1, Particle& b
 
 void Simulation::draw() const {
     for (const auto& body : _softBodies) {
-        body.draw();
+        body.draw(renderFan, renderPoints);
     }
 }

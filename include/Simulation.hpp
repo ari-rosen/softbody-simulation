@@ -12,9 +12,14 @@ public:
     float collisionRelaxation = 0.1f;
     float maxCorrection = 3.0f;
     float epsilon = 0.0001f;
+    Vector2 gravity = { 0.0f, 980.0f };
+    bool renderFan = false;
+    bool renderPoints = false;
 
     void addSoftBody(const SoftBody& body);
-    void update(float dt, Vector2 gravity);
+    void clearSoftBodies();
+
+    void update(float dt);
     void handleMouseInput(Vector2 mousePos, bool isDown, float grabRadius);
     void draw() const;
 

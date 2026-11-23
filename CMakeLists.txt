@@ -16,7 +16,14 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
     GIT_TAG        5.5
 )
-FetchContent_MakeAvailable(raylib)
+
+FetchContent_Declare(
+    raygui
+    GIT_REPOSITORY https://github.com/raysan5/raygui.git
+    GIT_TAG        5.0
+)
+
+FetchContent_MakeAvailable(raylib raygui)
 
 add_executable(soft_body_sim 
     src/main.cpp
@@ -24,6 +31,7 @@ add_executable(soft_body_sim
     src/SoftBody.cpp
     src/Particle.cpp
     src/Simulation.cpp
+    src/UIPanel.cpp
 )
 
 # 3. Link raylib and the raylib-cpp interface target
@@ -35,4 +43,5 @@ target_link_libraries(soft_body_sim
 target_include_directories(soft_body_sim 
     PRIVATE 
         include
+        ${raygui_SOURCE_DIR}/src
 )

@@ -5,6 +5,7 @@
 #include "Particle.hpp"
 #include "Constraint.hpp"
 
+
 class SoftBody {
 public:
     SoftBody(Vector2 center, float radius, int32_t resolution, Color color);
@@ -20,7 +21,7 @@ public:
 
     Rectangle getBoundingBox() const;
 
-    void draw() const;
+    void draw(bool renderFan, bool renderPoints) const;
 
 private:
     int32_t _resolution;
