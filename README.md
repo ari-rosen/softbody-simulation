@@ -1,2 +1,2 @@
 # softbody-simulation
-2D Softbody Physics Simulation Toy
+C++/Raylib 2D Softbody Physics Simulation Toy
