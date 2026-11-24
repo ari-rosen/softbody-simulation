@@ -1,5 +1,8 @@
 .git/
+.github/
 
 build/
 
 run.sh
+
+.DS_Store
