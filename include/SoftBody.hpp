@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <cstdint>
 
 #include "Particle.hpp"
 #include "Constraint.hpp"
