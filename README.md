@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/C%2B%2B-23-blue.svg" alt="C++23">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
 </p>
-C++/Raylib 2D Softbody Physics Simulation
+Custom C++/Raylib 2D Softbody Physics Simulation from scratch
 
 ## Features
 * **Constraint-Based Dynamics**: Verlet Integration particle movement and raycast based collisions
